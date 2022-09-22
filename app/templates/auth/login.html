@@ -1,0 +1,89 @@
+<!-- Courtesy of: https://github.com/bedimcode/responsive-login-form -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- ===== CSS ===== -->
+        <link rel="stylesheet" href="../../static/auth/css/styles.css">
+
+        <!-- ===== BOX ICONS ===== -->
+        <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+
+        <!-- Favicons -->
+        <link href="../../../static/home/img/favicons/favicon.png" rel="icon">
+        <link href="../../../static/home/img/favicons/apple-touch-icon.png" rel="apple-touch-icon">
+
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <title>Jared Rathbun - Portfolio | Login</title>  
+    </head>
+    <body>
+        <div class="l-form">
+            <div class="shape1"></div>
+            <div class="shape2"></div>
+
+            <div class="form">
+                <img src="../../static/auth/img/computer.svg" alt="../../static/auth/img/authentication.svg" class="form__img">
+
+                <form action="" class="form__content" id="login-form">
+                    <h1 class="form__title">Login</h1>
+
+                    <div class="form__div form__div-one">
+                        <div class="form__icon">
+                            <i class='bx bx-user-circle'></i>
+                        </div>
+
+                        <div class="form__div-input">
+                            <label for="" class="form__label">Username/Email</label>
+                            <input type="text" class="form__input" id='username-or-email' required oninput="checkFields()">
+                        </div>
+                    </div>
+
+                    <div class="form__div">
+                        <div class="form__icon">
+                            <i class='bx bx-lock' ></i>
+                        </div>
+
+                        <div class="form__div-input">
+                            <label for="" class="form__label">Password</label>
+                            <input type="password" class="form__input" id='password' required oninput="checkFields()">
+                        </div>
+                    </div>
+                    <a href="/sendreset" class="form__forgot">Forgot Password?</a>
+
+                    <p id="status-p" class="status-p" style="visibility: hidden"></p>
+
+                    <input type="submit" class="form__button" value="Login" style="cursor: not-allowed" disabled id='login-button'>
+
+                    <!-- <div class="form__social">
+                        <span class="form__social-text">Or login with</span>
+
+                        <a href="#" class="form__social-icon"><i class='bx bxl-facebook' ></i></a>
+                        <a href="#" class="form__social-icon"><i class='bx bxl-google' ></i></a>
+                        <a href="#" class="form__social-icon"><i class='bx bxl-instagram' ></i></a>
+                    </div> -->
+
+                    <div class="create-button">
+                        <a href='/register'>Don't have an account? Create One</a>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+        
+        <script>
+            $(document).ready(() => {
+                $('#login-button').click((e) => {
+                    e.preventDefault();
+
+                    sendLogin();
+                })
+            })
+        </script>
+        <!-- ===== MAIN JS ===== -->
+        <script src="../../static/auth/js/login.js"></script>
+    </body>
+</html>

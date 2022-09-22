@@ -1,0 +1,59 @@
+<!-- Courtesy of: https://github.com/bedimcode/responsive-login-form -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- ===== CSS ===== -->
+        <link rel="stylesheet" href="../../static/auth/css/styles.css">
+
+        <!-- ===== BOX ICONS ===== -->
+        <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+
+        <!-- Favicons -->
+        <link href="../../../static/home/img/favicons/favicon.png" rel="icon">
+        <link href="../../../static/home/img/favicons/apple-touch-icon.png" rel="apple-touch-icon">
+
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <title>Jared Rathbun - Portfolio | 2-Factor Authentication</title>  
+    </head>
+    <body>
+        <div class="form">
+            <img src="../../static/auth/img/computer.svg" alt="../../static/auth/img/authentication.svg" class="form__img">
+
+            <form action="" class="form__content" id="login-form">
+                <h1 class="form__title">2-Factor Authentication</h1>
+
+                <p style="margin-bottom: 40px;">Please enter your 2-Factor Authentication code from an authentication app like Google Authenticator or Authy.</p>
+                <div class="form__div" style="margin-top: 10px;">
+                    <div class="form__icon">
+                        <i class='bx bx-lock' ></i>
+                    </div>
+
+                    <div class="form__div-input">
+                        <label for="" class="form__label">OTP Code</label>
+                        <input type="text" class="form__input" id='otp-code' required oninput='checkOTP()'>
+                    </div>
+                </div>
+
+                <p id="status-p" class="status-p" style="visibility: hidden"></p>
+
+                <input type="submit" class="form__button" value="Verify OTP" style="cursor: not-allowed" disabled id='auth-button'>
+            </form>
+        </div>
+        
+        <script>
+            $(document).ready(() => {
+                $('#auth-button').click((e) => {
+                    e.preventDefault();
+                    sendOTP();
+                })
+            })
+        </script>
+        <!-- ===== MAIN JS ===== -->
+        <script src="../../static/auth/js/auth.js"></script>
+    </body>
+</html>

@@ -1,0 +1,45 @@
+{% extends "projects/header.html" %}
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../../static/bootstrap/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+{% block content %}
+
+<div class="location-bar">
+    {% set num_nodes = projects.class_info|length %}
+    {% for node in projects.class_info %}
+        <a href={{node.endpoint}}>{{node.name}}</a>
+        {% if loop.index < num_nodes %}
+            <p>></p>
+        {% endif %}
+    {% endfor %}
+</div>
+
+<div class="container-fluid">
+    <div class="row justify-content-center mx-auto my-3 text-center bg">
+        {% if projects.projects %}
+            {% for project in projects.projects %}
+                <div class="card mx-2 my-2" style="height: 25rem; width: 18rem; padding: 0;">
+                    {% if user_data.get('is_admin') == True %}
+                        <button class="remove-btn" id="{{project.remove_endpoint}}" onclick="removeProject(this);">X</button>
+                    {% endif %}
+
+                    <img src="{{project.icon_path}}" height="175px" class="card-img-top">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{project.project_name}}</h5>
+                        <a href="{{project.endpoint}}" class="btn btn-secondary">See Code</a>
+                        <p style="margin-top: 15px; color: white">{{project.desc}}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <h3>There are no projects for this class.</h3>
+        {% endif %}
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../../static/projects/js/projects.js"></script>
+{% endblock %}

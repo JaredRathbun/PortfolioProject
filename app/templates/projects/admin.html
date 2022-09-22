@@ -1,0 +1,94 @@
+{% extends "projects/header.html" %}
+
+{% block content %}
+
+<head>
+    <title>Jared Rathbun Portfolio | Admin Panel </title>
+</head>
+<br>
+<div class="container-fluid">
+    <div class="row justify-content-center w-100">
+        <form class="w-25 needs-validation" novalidate onsubmit="sendCreateClass(); return false;">
+            <fieldset class="border p-2">
+                <legend class="float-none">Create a New Class</legend>
+                <div class="form-group">
+                    <label for="class-id">Class ID</label>
+                    <input id="class-id" class="form-control" aria-describedby="id-help" placeholder="Enter class ID" required>
+                    <small id="id-help" class="form-text text-muted">ex. CSCXXXX</small>
+                </div>
+                <div class="form-group">
+                    <label for="class-title">Class Title</label>
+                    <input id="class-title" class="form-control" aria-describedby="title-help"
+                        placeholder="Enter class title" required>
+                    <small id="title-help" class="form-text text-muted">ex. Data Structures</small>
+                </div>
+                <div class="form-group">
+                    <label for="class-desc">Class Description</label>
+                    <textarea id="class-desc" class="form-control" placeholder="Enter class description" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="class-icon">Class Icon Image</label>
+                    <input type="file" id="class-icon" class="form-control" required>
+                </div>
+                <button class="btn btn-primary">Add Class</button>
+            </fieldset>
+        </form>
+
+        <form class="w-25 needs-validation" novalidate onsubmit="sendCreateProject(); return false;">
+            <fieldset class="border p-2">
+                <legend class="float-none">Upload a Project</legend>
+                <div class="form-group">
+                    <label for="project-class-id">Parent Class</label>
+                    <select id="project-class-id" class="form-control" required>
+                        <option disabled selected hidden>Select a class</option>
+                        {% for clazz in header_classes %}
+                            <option>{{clazz.class_string}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="project-name">Project Title</label>
+                    <input id="project-name" class="form-control" aria-describedby="class-name"
+                        placeholder="Enter project title" required>
+                    <small id="project-name" class="form-text text-muted">ex. Java Calculator</small>
+                </div>
+                <div class="form-group">
+                    <label for="project-desc">Project Description</label>
+                    <textarea id="project-desc" class="form-control" placeholder="Enter project description" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="project-zip">Project Zip File</label>
+                    <input type="file" id="project-zip" class="form-control" required accept=".zip">
+                </div>
+                <div class="form-group">
+                    <label for="project-icon">Project Icon Image</label>
+                    <input type="file" id="project-icon" class="form-control" required>
+                </div>
+                <button class="btn btn-primary">Add Project</button>
+            </fieldset>
+        </form>
+    </div>
+</div>
+<script>
+    (function () {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+</script>
+<script src="../../static/projects/js/admin.js"></script>
+{% endblock %}

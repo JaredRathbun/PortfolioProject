@@ -1,0 +1,79 @@
+<!-- Courtesy of: https://github.com/bedimcode/responsive-login-form -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- ===== CSS ===== -->
+        <link rel="stylesheet" href="../../static/auth/css/styles.css">
+
+        <!-- ===== BOX ICONS ===== -->
+        <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+
+        <!-- Favicons -->
+        <link href="../../../static/home/img/favicons/favicon.png" rel="icon">
+        <link href="../../../static/home/img/favicons/apple-touch-icon.png" rel="apple-touch-icon">
+
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <title>Jared Rathbun - Portfolio | Forgot Password</title>  
+    </head>
+    <body>
+        <div class="l-form">
+            <div class="shape1"></div>
+            <div class="shape2"></div>
+
+            <div class="form">
+                <img src="../../static/auth/img/computer.svg" alt="../../static/auth/img/authentication.svg" class="form__img">
+
+                <form action="" class="form__content" id="login-form">
+                    <h1 class="form__title">Reset Password</h1>
+
+                    <div class="form__div form__div-one">
+                        <div class="form__icon">
+                            <i class='bx bx-lock'></i>
+                        </div>
+
+                        <div class="form__div-input">
+                            <label for="" class="form__label">New Password</label>
+                            <input type="password" class="form__input" id='password-one' required oninput="checkPasswords()">
+                        </div>
+                    </div>
+
+                    <div class="form__div form__div-spacing">
+                        <div class="form__icon">
+                            <i class='bx bx-lock'></i>
+                        </div>
+                        <div class="form__div-input">
+                            <label for="" class="form__label">Re-Enter New Password</label>
+                            <input type="password" class="form__input" id='password-two' required oninput="checkPasswords()">
+                        </div>
+                    </div>
+
+                    <p id="status-p" class="status-p"></p>
+
+                    <input type="submit" class="form__button" value="Reset Password" style="cursor: not-allowed" disabled id='reset-button'>
+
+                    <div class="create-button">
+                        <a href='/login'>Remember your credentials? Login here</a>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+        
+        <script>
+            $(document).ready(() => {
+                $('#reset-button').click((e) => {
+                    e.preventDefault();
+
+                    sendReset();
+                })
+            })
+        </script>
+        <!-- ===== MAIN JS ===== -->
+        <script src="../../static/auth/js/reset.js"></script>
+    </body>
+</html>

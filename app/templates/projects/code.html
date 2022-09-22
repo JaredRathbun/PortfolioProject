@@ -1,0 +1,165 @@
+{% extends "projects/header.html" %}
+
+<head>
+    <link href="../../static/projects/css/code.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <style>
+        .directory-list ul {
+            margin-left: 10px;
+            padding-left: 20px;
+            border-left: 1px dashed #ddd;
+        }
+
+        .directory-list li {
+            list-style: none;
+            color: #888;
+            font-size: 17px;
+            font-style: italic;
+            font-weight: normal;
+        }
+
+        .directory-list a {
+            border-bottom: 1px solid transparent;
+            color: #888;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .directory-list a:hover {
+            border-color: #eee;
+            color: #000;
+        }
+
+        .directory-list .folder,
+        .directory-list .folder>a {
+            color: #777;
+            font-weight: bold;
+        }
+
+
+        .directory-li {
+            list-style: none;
+            color: #888;
+            font-size: 17px;
+            font-style: italic;
+            font-weight: normal;
+        }
+
+        .folder-li {
+            color: black;
+        }
+
+        .icon {
+            margin-right: 10px;
+        }
+
+        .border {
+            margin: 10px;
+        }
+
+        .scrollable {
+            overflow: scroll;
+        }
+    </style>
+</head>
+
+{% block content %}
+
+{% macro display_tree(structure) %}
+    {% for element in structure %}
+        {% if has_child_dict(element) %}
+            <li class="folder-li" style="list-style: none; font-style: normal; font-weight: bold; white-space: nowrap;">
+                <i class="bi-folder-fill" style="margin-right: 10px"></i>
+                {% set dir_name_list = element | list %}
+                <i class="hoverable">{{dir_name_list[0]}}</i>
+                <ul>
+                    {% for k in element.keys() %}
+                        {{display_tree(element[k])}}
+                    {% endfor %}
+                </ul>
+            </li>
+        {% else %}
+            <li class="directory-li" style="list-style: none; font-style: italic; font-weight: normal; white-space: nowrap;">
+                <div style="display:inline-block">
+                    <i class="bi bi-file-earmark-code" style="margin-right: 10px">
+                        <button onclick="getFileCode(this)" id={{element.endpoint}} style="border: none; outline: none; background: none" class="hoverable">
+                            {{element.file_name}}
+                        </button>
+                    </i>
+                </div>
+            </li>
+        {% endif %}
+    {% endfor %}
+{% endmacro %}
+
+<div class="location-bar">
+    {% set num_nodes = location_info|length %}
+    {% for node in location_info %}
+        <a href={{node.endpoint}}>{{node.name}}</a>
+        {% if loop.index < num_nodes %}
+            <p>></p>
+        {% endif %}
+    {% endfor %}
+</div>
+
+<div class="container-fluid">
+    <!-- Row for buttons. -->
+    <div class="row">
+         <div class="d-inline-flex justify-content-end">
+                <button class="btn mx-1" onclick="downloadProject(this)" id={{download_endpoint ~ '*' ~ api_token}}>
+                    <i class="bi bi-file-earmark-zip-fill"></i>
+                    Download Project
+                </button>
+                <button id="create-bug-button" class="btn mx-1" data-toggle="tooltip" data-placement="top" onclick="popBugForm()">
+                    <i class="fa fa-solid fa-bug"></i>
+                    Create Bug
+                </button>
+                <button id="add-comment-button" class="btn mx-1" onclick="popCommentForm()">
+                    <i class="fa fa-solid fa-comment"></i>
+                    Add Comment
+                </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            <div style="overflow: auto;">
+                <div style="margin: 10px; border: 2px solid black; border-radius: 5px; background-color: #f8f8f8; height: 78vh; overflow-y: scroll;">
+                    <ul class="directory-list" style="margin-top: 5px; overflow: auto;">
+                        {{ display_tree(structure) }}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg" id="code-div" style="background-color: #f8f8f8; margin: 10px; margin-right: 2px; border: 2px solid black; border-radius: 5px; display: flex; justify-content: center; align-items: center; max-height: 78vh; overflow-y: scroll;">
+            <h4>Select a file to preview :)</h4>
+        </div>
+    </div>
+    <div class="row my-10 mt-20 justify-content-center">
+        <div class="col-10 d-inline-flex" style="gap: 1rem;">
+            <button id="comments-btn" class="btn w-50 mx-10" disabled="disabled" onclick="populateComments(); invertButtons();">
+                Comments
+            </button>
+            <button id="bugs-btn" class="btn w-50 mx-10" onclick="populateBugs(); invertButtons();">
+                Bugs
+            </button>
+        </div>
+    </div>
+    <div id='comments-issues-div-container' class="row justify-content-center">
+        {% if project_id %}
+            <div class="w-90 h-500" id={{project_id}} style="width: 80%; margin: 10px;">
+                
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="../../static/projects/js/code.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bootstrap-4@5.0.10/bootstrap-4.css">
+<script>
+    window.onload = () => {
+        populateComments();
+    };
+</script>
+
+{% endblock %}

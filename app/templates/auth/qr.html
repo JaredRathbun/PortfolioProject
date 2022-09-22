@@ -1,0 +1,58 @@
+<!-- Courtesy of: https://github.com/bedimcode/responsive-login-form -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- ===== CSS ===== -->
+        <link rel="stylesheet" href="../../static/auth/css/styles.css">
+
+        <!-- ===== BOX ICONS ===== -->
+        <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+
+        <!-- Favicons -->
+        <link href="../../../static/home/img/favicons/favicon.png" rel="icon">
+        <link href="../../../static/home/img/favicons/apple-touch-icon.png" rel="apple-touch-icon">
+
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <title>Jared Rathbun - Portfolio | 2-Factor Authentication</title>  
+    </head>
+    <body>
+        <div class="l-form">
+            <div class="shape1"></div>
+            <div class="shape2"></div>
+
+            <div class="form">
+                <img src="../../static/auth/img/computer.svg" alt="../../static/auth/img/authentication.svg" class="form__img">
+                
+                <form action="" class="form__content" id="login-form">
+                    <h1 class="form__title">2-Factor Authentication</h1>
+
+                    <div class="centered__div">
+                        <img style="width: 200px" class="qr-code" src={{qr_code}}></img>
+
+                        <p>Please scan this QR Code with an app such as Google Authenticator or Authy.</p>
+                    </div>
+
+                    <input type="submit" class="form__button" value="Login" id='auth-button'>
+                </form>
+            </div>
+
+        </div>
+        
+        <script>
+            $(document).ready(() => {
+                $('#auth-button').click((e) => {
+                    e.preventDefault();
+
+                    getLoginPage();
+                })
+            })
+        </script>
+        <!-- ===== MAIN JS ===== -->
+        <script src="../../static/auth/js/qr.js"></script>
+    </body>
+</html>

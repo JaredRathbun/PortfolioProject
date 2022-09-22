@@ -1,0 +1,97 @@
+/* /* Demo page styles
+https://codemyui.com/directory-list-with-collapsible-nested-folders-and-files/ */
+
+body {
+  background: #eee;
+  font-family: "times new roman", serif;
+  line-height: 30px;
+}
+
+h2 {
+  color: #aaa;
+  font-size: 30px;
+  line-height: 40px;
+  font-style: italic;
+  font-weight: 200;
+  margin: 40px;
+  text-align: center;
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.7);
+}
+
+.comment {
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.box {
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+  margin: 30px 5%;
+  padding: 5%;
+}
+
+@media (min-width: 544px) {
+  .box {
+    margin: 40px auto;
+    max-width: 440px;
+    padding: 40px;
+  }
+} 
+
+.directory-list ul {
+  margin-left: 10px;
+  padding-left: 20px;
+  border-left: 1px dashed #ddd;
+}
+
+.directory-list li {
+  list-style: none;
+  color: #888;
+  font-size: 17px;
+  font-style: italic;
+  font-weight: normal;
+}
+
+.directory-list a {
+  border-bottom: 1px solid transparent;
+  color: #888;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.directory-list a:hover {
+  border-color: #eee;
+  color: #000;
+}
+
+.directory-list .folder,
+.directory-list .folder>a {
+  color: #777;
+  font-weight: bold;
+}
+
+
+.directory-li {
+  list-style: none;
+  color: #888;
+  font-size: 17px;
+  font-style: italic;
+  font-weight: normal;
+}
+
+.folder-li {
+  color: black;
+}
+
+.icon {
+  margin-right: 10px;
+} 
+
+.border {
+  margin: 10px;
+}
+
+.hoverable:hover {
+  text-decoration: underline;
+}
